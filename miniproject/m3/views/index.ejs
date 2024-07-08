@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Real-time Data Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script> <script>
+    const socket = io();
+    let chartData = {
+      // Initial chart configuration
+    };
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const myChart = new Chart(ctx, chartData);
+
+    socket.on('data-update', (newData) => {
+      // Update chart data with new data
+      // ...
+
+      // Update the chart
+      myChart.update();
+    });
+  </script>
+</head>
+<body>
+  <h1>Real-time Data Visualization</h1>
+  <canvas id="myChart" width="400" height="200"></canvas>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!-- views/index.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Weather App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #f0f8ff;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    form {
+      margin-bottom: 20px;
+    }
+    .weather {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #e0f7fa;
+      display: inline-block;
+      border-radius: 8px;
+    }
+    .error {
+      color: red;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Weather App</h1>
+  <form action="/" method="post">
+    <input type="text" name="city" placeholder="Enter city name" required>
+    <button type="submit">Get Weather</button>
+  </form>
+
+  <% if (weather) { %>
+  <div class="weather">
+    <h2>Weather in <%= weather.city %></h2>
+    <p>Temperature: <%= weather.temp %>°C</p>
+    <p>Description: <%= weather.description %></p>
+    <p>Humidity: <%= weather.humidity %>%</p>
+    <p>Wind Speed: <%= weather.windSpeed %> m/s</p>
+    <p>Visibility: <%= weather.visibility %> meters</p>
+  </div>
+  <% } %>
+
+  <% if (error) { %>
+  <div class="error">
+    <p><%= error %></p>
+  </div>
+  <% } %>
+
+
+  <!-- Add JavaScript code to fetch city suggestions -->
+<!-- <script>
+    const input = document.querySelector('input[name="city"]');
+    input.addEventListener('input', () => {
+      const inputValue = input.value.trim();
+      if (inputValue.length > 2) {
+        fetch(`/suggestions?q=${inputValue}`)
+          .then(response => response.json())
+          .then(data => {
+            // Handle city suggestions
+            // Add event listener to input field to fetch city suggestions
+const input = document.querySelector('input[name="city"]');
+input.addEventListener('input', () => {
+  const inputValue = input.value.trim();
+  if (inputValue.length > 2) {
+    fetch(`/suggestions?q=${inputValue}`)
+      .then(response => response.json())
+      .then(data => {
+        // Handle city suggestions
+        const suggestionsContainer = document.getElementById('suggestions-container');
+        suggestionsContainer.innerHTML = '';
+
+        data.forEach(suggestion => {
+          const suggestionItem = document.createElement('div');
+          suggestionItem.textContent = suggestion.name;
+          suggestionItem.classList.add('suggestion-item');
+          suggestionItem.addEventListener('click', () => {
+            // Set input value to selected suggestion
+            input.value = suggestion.name;
+            // Clear suggestions container
+            suggestionsContainer.innerHTML = '';
+          });
+          suggestionsContainer.appendChild(suggestionItem);
+        });
+      })
+      .catch(error => {
+        console.error('Error fetching city suggestions:', error);
+      });
+  }
+});
+
+          })
+          .catch(error => {
+            console.error('Error fetching city suggestions:', error);
+          });
+      }
+    });
+  </script> -->
+  
+</body>
+</html>
